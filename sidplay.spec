@@ -3,12 +3,14 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	3%{?dist}
+Release:	4%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
 Source:		http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
-Patch0:		sidplay_2.0.9-4.diff
+# Patch lifted from Debian
+# http://packages.debian.org/unstable/oldlibs/sidplay
+Patch0:		sidplay_2.0.9-5.diff.gz
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:	GPL
 BuildRequires:	libsidplay-devel
@@ -49,6 +51,10 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Wed Nov 12 2008 Linus Walleij <triad@df.lth.se> 2.0.9-4
+- Import into RPMFusion.
+- Update to latest Debian patchset.
+
 * Mon Nov 19 2007 Linus Walleij <triad@df.lth.se> 2.0.9-3
 - Rebuild from Debian patchset.
 
