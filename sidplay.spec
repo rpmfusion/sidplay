@@ -3,7 +3,7 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	5%{?dist}
+Release:	6%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
@@ -52,6 +52,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.0.9-6
+- rebuild for new F11 features
+
 * Wed Nov 13 2008 Linus Walleij <triad@df.lth.se> 2.0.9-5
 - Fixed the scratch build issue, needed the static libs.
 
