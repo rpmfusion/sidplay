@@ -11,6 +11,7 @@ Source:		http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # Patch lifted from Debian
 # http://packages.debian.org/unstable/oldlibs/sidplay
 Patch0:		sidplay_2.0.9-5.diff.gz
+Patch1:		gcc440.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:	GPL
 BuildRequires:	libsidplay-devel
@@ -33,6 +34,7 @@ without the need for special modifications.
 %prep
 %setup -q
 %patch0 -p1
+%patch1 -p1
 
 %build
 %configure --with-sidbuilders=%{_libdir}/sidplay/builders
