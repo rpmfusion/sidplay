@@ -3,7 +3,7 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	7%{?dist}
+Release:	8%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
@@ -12,6 +12,8 @@ Source:		http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
 # http://packages.debian.org/unstable/oldlibs/sidplay
 Patch0:		sidplay_2.0.9-5.diff.gz
 Patch1:		gcc440.patch
+Patch2:		sidplay-alsa.patch
+Patch3:		sidplay-autohell-fixes.patch
 BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 License:	GPL
 BuildRequires:	libsidplay-devel
@@ -35,9 +37,12 @@ without the need for special modifications.
 %setup -q
 %patch0 -p1
 %patch1 -p1
+%patch2 -p1
+%patch3 -p1
 
 %build
-%configure --with-sidbuilders=%{_libdir}/sidplay/builders
+ACLOCAL='aclocal -I unix' autoreconf -v --force --install
+%configure --with-sidbuilders=%{_libdir}/sidplay/builders --with-alsa
 make %{?_smp_mflags}
 
 %install
@@ -54,6 +59,11 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Mon Sep 07 2009 Bernie Innocenti <bernie@codewiz.org> 2.0.9-7
+- Add sidplay-alsa.patch, stolen from Gentoo
+- Add sidplay-autohell-fixes.patch, rolled in house
+- Rock!
+
 * Mon May 11 2009 Linus Walleij <triad@df.lth.se> 2.0.9-6
 - Located a suspect GCC 4.4.0 rebuild bug.
 
