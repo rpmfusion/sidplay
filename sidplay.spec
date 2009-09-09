@@ -3,7 +3,7 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	9%{?dist}
+Release:	10%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
@@ -23,6 +23,7 @@ BuildRequires:	libstdc++-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
+BuildRequires:	alsa-lib-devel
 Provides:	sidplay2
 Obsoletes:	sidplay2
 
@@ -60,6 +61,9 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
+* Thu Sep 10 2009 Linus Walleij <triad@df.lth.se> 2.0.9-10
+- Requires alsa-lib-devel too!
+
 * Thu Sep 10 2009 Linus Walleij <triad@df.lth.se> 2.0.9-9
 - Think it BuildRequires libtool then it'll build I hope?
 
