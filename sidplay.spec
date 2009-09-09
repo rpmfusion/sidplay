@@ -3,7 +3,7 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	8%{?dist}
+Release:	9%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
@@ -22,6 +22,7 @@ BuildRequires:	sidplay-libs-static
 BuildRequires:	libstdc++-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
+BuildRequires:	libtool
 Provides:	sidplay2
 Obsoletes:	sidplay2
 
@@ -59,12 +60,15 @@ rm -rf $RPM_BUILD_ROOT
 %{_bindir}/*
 
 %changelog
-* Mon Sep 07 2009 Bernie Innocenti <bernie@codewiz.org> 2.0.9-7
+* Thu Sep 10 2009 Linus Walleij <triad@df.lth.se> 2.0.9-9
+- Think it BuildRequires libtool then it'll build I hope?
+
+* Mon Sep 7 2009 Bernie Innocenti <bernie@codewiz.org> 2.0.9-8
 - Add sidplay-alsa.patch, stolen from Gentoo
 - Add sidplay-autohell-fixes.patch, rolled in house
 - Rock!
 
-* Mon May 11 2009 Linus Walleij <triad@df.lth.se> 2.0.9-6
+* Mon May 11 2009 Linus Walleij <triad@df.lth.se> 2.0.9-7
 - Located a suspect GCC 4.4.0 rebuild bug.
 
 * Sun Mar 29 2009 Thorsten Leemhuis <fedora [AT] leemhuis [DOT] info> - 2.0.9-6
