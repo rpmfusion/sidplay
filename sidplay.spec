@@ -3,29 +3,27 @@
 
 Name:		sidplay
 Version:	2.0.9
-Release:	10%{?dist}
+Release:	11%{?dist}
 Summary:	A command-line tool for playing back SID files
 URL:		http://sidplay2.sourceforge.net/
 Group:		Applications/Multimedia
-Source:		http://download.sourceforge.net/%{name}/%{name}-%{version}.tar.gz
+Source:		http://downloads.sourceforge.net/sidplay2/%{name}-%{version}.tar.gz
 # Patch lifted from Debian
 # http://packages.debian.org/unstable/oldlibs/sidplay
 Patch0:		sidplay_2.0.9-5.diff.gz
 Patch1:		gcc440.patch
 Patch2:		sidplay-alsa.patch
 Patch3:		sidplay-autohell-fixes.patch
-BuildRoot:	%{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
-License:	GPL
+License:	GPLv2+
 BuildRequires:	libsidplay-devel
-BuildRequires:	sidplay-libs-devel
-BuildRequires:	sidplay-libs-static
+BuildRequires:	sidplay-libs-devel >= 2.1.1-11
 BuildRequires:	libstdc++-devel
 BuildRequires:	automake
 BuildRequires:	autoconf
 BuildRequires:	libtool
 BuildRequires:	alsa-lib-devel
-Provides:	sidplay2
-Obsoletes:	sidplay2
+Provides:	sidplay2 = %{version}-%{release}
+Obsoletes:	sidplay2 < %{version}-%{release}
 
 %description
 Sidplay2 is the second in the Sidplay series and provides a console
@@ -44,23 +42,22 @@ without the need for special modifications.
 
 %build
 ACLOCAL='aclocal -I unix' autoreconf -v --force --install
-%configure --with-sidbuilders=%{_libdir}/sidplay/builders --with-alsa
+%configure --with-sidbuilders=%{_libdir} --with-alsa
 make %{?_smp_mflags}
 
 %install
-rm -rf $RPM_BUILD_ROOT 
-%makeinstall
-
-%clean
-rm -rf $RPM_BUILD_ROOT
+make install DESTDIR=$RPM_BUILD_ROOT
 
 %files
-%defattr(-,root,root)
+%defattr(-,root,root,-)
 %doc AUTHORS ChangeLog COPYING README TODO
 %{_mandir}/man*/*
 %{_bindir}/*
 
 %changelog
+* Thu Sep  8 2011 Hans de Goede <j.w.r.degoede@gmail.com> - 2.0.9-11
+- Rebuild against new sidplay-libs with dynamic builders
+
 * Thu Sep 10 2009 Linus Walleij <triad@df.lth.se> 2.0.9-10
 - Requires alsa-lib-devel too!
 
